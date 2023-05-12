@@ -10,7 +10,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPayment;
     private Date datePayment;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "idOrder")
     private Order order;
 }

@@ -18,8 +18,8 @@ public class Order {
     @JoinColumn(name = "idUser")
     private User user;
 
-    @OneToOne
+    @OneToOne(mappedBy = "order")
     private Payment payment;
-    @OneToMany
+    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
 }

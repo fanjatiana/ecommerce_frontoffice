@@ -14,6 +14,7 @@ public class OrderItem {
     private Product product;
     private int quantity;
     private double price;
+
     @ManyToOne
     @JoinColumn(name = "idOrder")
     private Order order;
