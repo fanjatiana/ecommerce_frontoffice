@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 
 import java.util.Date;
 @Entity
-@Table(name="payements")
+@Table(name="payments")
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idPayment;
     private Date datePayment;
-    @OneToOne
-    @JoinColumn(name = "idOrder")
+
+    @ManyToOne
     private Order order;
+
 }

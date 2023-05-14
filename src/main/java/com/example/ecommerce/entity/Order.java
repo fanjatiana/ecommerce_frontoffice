@@ -14,12 +14,13 @@ public class Order {
     private int idOrder;
     private Date dateOrder;
     private double totalAmount;
+
     @ManyToOne
-    @JoinColumn(name = "idUser")
     private User user;
 
-    @OneToOne(mappedBy = "order")
+    @OneToOne
     private Payment payment;
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL)
+
+    @OneToMany(mappedBy = "order")
     private List<OrderItem> orderItems;
 }

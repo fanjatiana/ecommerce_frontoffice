@@ -10,12 +10,10 @@ public class OrderItem {
     private int idOrderItem;
 
     @ManyToOne
-    @JoinColumn(name = "idProduct")
     private Product product;
     private int quantity;
     private double price;
 
     @ManyToOne
-    @JoinColumn(name = "idOrder")
     private Order order;
 }
