@@ -12,6 +12,7 @@ public class EditProfileController {
     @Autowired
     private UserRepository userRepository;
 
+    // reste à utiliser userService au lieu de userRepository !
     @GetMapping("/edit-profile")
     public String showEditProfileForm(@RequestParam("id") int id, Model model) {
         User user = userRepository.findById(id)
@@ -21,7 +22,7 @@ public class EditProfileController {
     }
 
     @PostMapping("/edit-profile")
-    public String updateProfile( @ModelAttribute("user") User user){
+    public String updateProfile(@ModelAttribute("user") User user) {
         userRepository.save(user);
         return "redirect:profile";
     }

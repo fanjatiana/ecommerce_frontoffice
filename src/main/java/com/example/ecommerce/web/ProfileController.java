@@ -13,6 +13,8 @@ import java.util.Optional;
 public class ProfileController {
     @Autowired
     UserRepository userRepository;
+
+    // reste à utiliser userService au lieu de userRepository !
     @GetMapping("/profile")
     public String showProfile(Model model) {
         int id = 1;
