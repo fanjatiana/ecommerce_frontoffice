@@ -1,10 +1,7 @@
-package com.example.ecommerce.web;
+package com.example.ecommerce.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import java.util.Optional;
 
 @Controller
 public class AccountController {

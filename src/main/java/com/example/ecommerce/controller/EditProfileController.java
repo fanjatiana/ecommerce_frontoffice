@@ -1,4 +1,4 @@
-package com.example.ecommerce.web;
+package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
