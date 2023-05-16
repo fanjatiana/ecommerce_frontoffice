@@ -16,7 +16,7 @@ public class EcommerceApplication implements CommandLineRunner {
     UserService userService;
     @Override
     public void run(String... args) throws Exception {
-        userService.AddUser();
+        //userService.AddUser();
 
     }
 }

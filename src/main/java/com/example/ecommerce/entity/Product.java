@@ -13,9 +13,9 @@ public class Product {
     private double PriceProduct;
     private boolean selectedProduct;
     private String photoProduct;
+
     @ManyToOne
-    @JoinColumn(name = "idCategory")
-    private  Category category;
+    private Category category;
 
     public Product() {
     }

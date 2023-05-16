@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<main>
+    <div class="container d-flex flex-column align-items-center justify-content-center mt-4">
+        <div class="card row shadow p-3 mb-5 bg-body rounded " style="width: 35%">
+            <div class="card-header">
+                <img class="w-100" src="/images/avatar2.jpg">
+            </div>
+            <div class="card-body">
+                <p>Bonjour <br> je suis {nom Admin)...,<br>que puis-je faire pour vous ?</p>
+            </div>
+        </div>
+        <div class="row" style="width: 35%">
+            <form action="#" th:action="@{/contact-form}" th:object="${user}" method="post">
+                <input type="hidden" th:field="*{idUser}" name="id_user"/>
+                <div class="mb-3 col-12">
+                    <label for="email" class="form-label fw-bold">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" readonly
+                           th:field="*{email}"
+                           th:value="${user.email}">
+                </div>
+                <div class="mb-3 col-12">
+                    <label for="exampleFormControlTextarea1" class="form-label fw-bold">Votre message</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

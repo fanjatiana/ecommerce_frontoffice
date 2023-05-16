@@ -17,7 +17,7 @@ public class ProfileController {
     // reste à utiliser userService au lieu de userRepository !
     @GetMapping("/profile")
     public String showProfile(Model model) {
-        int id = 1;
+        int id = 3;
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
