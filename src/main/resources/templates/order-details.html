@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Details</title>
+</head>
+<body>
+<h1>Order Details</h1>
+<p>Order ID: <span th:text="${order.idOrder}"></span></p>
+<p>Total Amount: <span th:text="${order.totalAmount}"></span></p>
+<p>Client Name: <span th:text="${order.clientName}"></span></p>
+<p>Client Email: <span th:text="${order.clientEmail}"></span></p>
+<p>Client Phone: <span th:text="${order.clientPhone}"></span></p>
+<p>Shipping Address Line 1: <span th:text="${order.shippingAddressLine1}"></span></p>
+<p>Shipping Address Line 2: <span th:text="${order.shippingAddressLine2}"></span></p>
+<p>Shipping City: <span th:text="${order.shippingCity}"></span></p>
+<p>Shipping State: <span th:text="${order.shippingState}"></span></p>
+<p>Shipping Postal Code: <span th:text="${order.shippingPostalCode}"></span></p>
+<p>Payment ID: <span th:text="${order.payment.idPayment}"></span></p>
+<p>Payment Date: <span th:text="${order.payment.datePayment}"></span></p>
+</body>
+</html>
