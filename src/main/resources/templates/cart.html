@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cart</title>
+</head>
+<body>
+<h1>Cart</h1>
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Action</th>
+  </tr>
+  <tr th:each="orderItem : ${orderItems}">
+    <td th:text="${orderItem.product.nameProduct}"></td>
+    <td>
+      <form th:action="@{/cart/{productId}/updateQuantity(productId=${orderItem.product.idProduct})}" method="post">
+        <input type="number" name="quantity" th:value="${orderItem.quantity}">
+        <button type="submit">Update</button>
+      </form>
+    </td>
+    <td th:text="${orderItem.getProduct().getPriceProduct() * orderItem.getQuantity()}"></td>
+    <td>
+      <form th:action="@{/cart/{productId}/remove(productId=${orderItem.product.idProduct})}" method="post">
+        <button type="submit">Remove</button>
+      </form>
+    </td>
+  </tr>
+</table>
+<h2>Total Price: <span th:text="${totalPrice}"></span></h2>
+<form th:action="@{/payment}" method="get">
+  <button type="submit">Proceed to Payment</button>
+</form>
+</body>
+</html>

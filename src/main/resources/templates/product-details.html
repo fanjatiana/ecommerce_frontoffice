@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Product Details</title>
+</head>
+<body>
+<h1>Product Details</h1>
+<h2 th:text="${product.nameProduct}"></h2>
+<p th:text="${product.descriptionProduct}"></p>
+<p>Price: <span th:text="${product.PriceProduct}"></span></p>
+<form th:action="@{/products/{productId}/addToCart(productId=${product.idProduct})}" method="post">
+  <input type="number" name="quantity" placeholder="Quantity" required>
+  <button type="submit">Add to Cart</button>
+</form>
+</body>
+</html>
