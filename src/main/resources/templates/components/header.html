@@ -30,7 +30,7 @@
                     <div class="collapse navbar-collapse w-50 justify-content-end" id="navbarSupportedContent">
                         <ul class="navbar-nav mb-2 mb-lg-0 ">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Panier</a>
+                                <a class="nav-link" href="shopping-cart">Panier</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -39,15 +39,14 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" href="account">Profile</a>
+                                        <a class="dropdown-item" href="account">Compte</a>
                                     </li>
                                     <li>
                                         <form th:action="@{/logout}" method="post">
                                             <input type="hidden" name="_csrf"/>
-                                            <button type="submit" class="dropdown-item">Deconnexion</button>
+                                            <button type="submit" class="dropdown-item">Déconnexion</button>
                                         </form>
                                     </li>
-
                                 </ul>
                             </li>
                         </ul>
