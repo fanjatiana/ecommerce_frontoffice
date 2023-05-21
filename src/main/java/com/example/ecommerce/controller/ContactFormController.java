@@ -29,6 +29,11 @@ public class ContactFormController {
             }
         }
 
+   @GetMapping("/thanks")
+    public String showThanksPage() {
+        return "thanks";
+    }
+
     @PostMapping("/thanks")
     public String PostMessage() {
         return "thanks";
