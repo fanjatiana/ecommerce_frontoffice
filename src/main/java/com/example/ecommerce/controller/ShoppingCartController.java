@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public class ShoppingCartController {
     @Autowired
     ProductService productService;
 
-    @GetMapping("/shopping-cart")
+    /*@GetMapping("/shopping-cart")
     public String displayShoppingCartPage(Model model) {
         List<Product> productList = productService.getAllProducts();
         model.addAttribute("products", productList);
@@ -29,7 +27,7 @@ public class ShoppingCartController {
         model.addAttribute("totalProducts", totalProductSelected);
 
         return "shopping-cart";
-    }
+    }*/
 
     // calcule du nombre de produit total (produit selectionnée + quantité => ajout d'un attribut quantité dans products ?)
    /* @PostMapping("/shopping-cart")

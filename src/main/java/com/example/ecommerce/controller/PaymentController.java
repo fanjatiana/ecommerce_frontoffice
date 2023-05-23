@@ -28,7 +28,7 @@ public class PaymentController {
 
     @Autowired
     RoleService roleService;
-    @GetMapping("/payment")
+   /* @GetMapping("/payment")
     public String showPaymentPage(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -46,7 +46,8 @@ public class PaymentController {
         } else {
             return "redirect:/login";
         }
-    }
+    }*/
+
 
     @GetMapping("/payment-validated")
     public String showPaymentValidatedPage() {

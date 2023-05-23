@@ -29,6 +29,8 @@ public class ContactFormController {
             }
         }
 
+        // To do (fetch admin data) //
+
    @GetMapping("/thanks")
     public String showThanksPage() {
         return "thanks";

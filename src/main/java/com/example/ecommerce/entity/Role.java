@@ -7,7 +7,7 @@ import lombok.*;
 @Table(name="roles")
 @Getter
 @Setter
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @RequiredArgsConstructor
 public class Role {
     @Id

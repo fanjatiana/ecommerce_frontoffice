@@ -33,7 +33,7 @@ public class EditProfileController {
     }
     @PostMapping("/edit-profile")
     public String updateProfile(@ModelAttribute("user") User user, Model model) {
-        Optional<Role> clientRole = roleService.findById(3);
+        Optional<Role> clientRole = roleService.findById(3); // id 3 = User role
         user.setRole(clientRole.orElse(null));
         userService.save(user);
         model.addAttribute("user", user);

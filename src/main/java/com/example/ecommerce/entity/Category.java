@@ -1,8 +1,5 @@
 package com.example.ecommerce.entity;
-
 import jakarta.persistence.*;
-
-import java.util.Collection;
 import java.util.List;
 
 @Entity
