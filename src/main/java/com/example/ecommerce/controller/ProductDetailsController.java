@@ -31,9 +31,8 @@ public class ProductDetailsController {
     }
 
     @PostMapping("/products/{productId}/addToCart")
-    public String addToCart(@PathVariable int productId, @RequestParam String quantity, HttpSession session) {
-        int ItemQuantity = Integer.parseInt(quantity);
-        productService.addToCart(productId, ItemQuantity, session);
+    public String addToCart(@PathVariable int productId, @RequestParam int quantity, HttpSession session) {
+        productService.addToCart(productId, quantity, session);
         return "redirect:/products/{productId}";
     }
 

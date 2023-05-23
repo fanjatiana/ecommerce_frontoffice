@@ -18,12 +18,16 @@ public class User {
     private String username;
     @NonNull
     private String password;
+    @NonNull
     private String fullName;
     @NonNull
     private String email;
+    @NonNull
     private String address;
+    @NonNull
     private String phoneNumber;
-    @ManyToOne
+    @NonNull
+    @ManyToOne(cascade = CascadeType.ALL)
     private Role role;
 
 }

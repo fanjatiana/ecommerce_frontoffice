@@ -1,7 +1,9 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.OrderItem;
+import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.service.OrderItemService;
+import com.example.ecommerce.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,9 @@ public class OrderItemController {
     @Autowired
     private OrderItemService orderItemService;
 
+    @Autowired
+    private ProductService productService;
+
     @GetMapping("/cart")
     public String getCartItems(Model model, HttpSession session) {
         List<OrderItem> orderItems = orderItemService.getCartItemsFromSession(session);
@@ -26,7 +31,12 @@ public class OrderItemController {
             return "redirect:/account";
         }
         double total = orderItemService.calculateTotalPrice(orderItems);
+
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+
+     List<Product> productList = productService.getAllProducts();
         model.addAttribute("totalPrice", total);
+        model.addAttribute("itemQuantity", itemQuantity);
         model.addAttribute("orderItems", orderItems);
         return "cart";
     }
@@ -42,4 +52,6 @@ public class OrderItemController {
         orderItemService.updateCartItemQuantity(session, productId, quantity);
         return "redirect:/cart";
     }
+
+
 }

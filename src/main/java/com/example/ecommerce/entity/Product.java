@@ -14,7 +14,7 @@ public class Product {
     private boolean selectedProduct;
     private String photoProduct;
 
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.ALL)
     private Category category;
 
     public Product() {

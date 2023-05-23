@@ -45,13 +45,13 @@ public class ProductService {
             }
         }
         return totalPrice;
-    }
+    }*/
 
     public int calculateProductQuantity(){
         List<Product> productList = productRepository.findAll();
         int productCount =0;
         for (Product product : productList) {
-            if (product.isSelectedProduct()) {
+            if (product.isSelectedProduct()==true) {
                 productCount++;
             }
         }

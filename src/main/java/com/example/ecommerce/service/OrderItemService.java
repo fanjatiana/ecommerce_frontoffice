@@ -29,15 +29,28 @@ public class OrderItemService {
         }
     }
 
-    public void updateCartItemQuantity(HttpSession session, int productId, int quantity) {
+    public int updateCartItemQuantity(HttpSession session, int productId, int quantity) {
         List<OrderItem> orderItems = getCartItemsFromSession(session);
+        int countQuantity = 0;
         if (orderItems != null) {
             for (OrderItem orderItem : orderItems) {
                 if (orderItem.getProduct().getIdProduct() == productId) {
                     orderItem.setQuantity(quantity);
+                    countQuantity ++;
                     break;
                 }
             }
         }
+        return countQuantity;
+    }
+
+    public int calculateTotalQuantity(List<OrderItem> orderItems) {
+        int totalQuantity = 0;
+
+        for (OrderItem orderItem : orderItems) {
+            totalQuantity += orderItem.getQuantity();
+        }
+
+        return totalQuantity;
     }
 }
