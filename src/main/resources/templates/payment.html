@@ -35,25 +35,25 @@
                         <h3>Mode de paiement</h3>
                     </div>
                     <div class="card-body">
-                        <form action="payment" method="post">
+                        <form th:action="@{/payment}" method="post" th:object="${paymentForm}">
                             <div class="mb-3 d-flex justify-content-center">
                                 <img src="/images/cb.jpg" alt=" liste de cartes bancaires">
                             </div>
                             <div class="mb-3">
                                 <label for="cardNumber" class="form-label">Numéro de carte</label>
-                                <input type="number" class="form-control" id="cardNumber" name="cardNumber" required>
+                                <input th:field="*{payment.cardNumber}" type="number" class="form-control" id="cardNumber" name="cardNumber" required>
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Nom sur la carte</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
+                                <input type="text"  th:field="*{payment.cardHolderName}"  class="form-control" id="username" name="username" required>
                             </div>
                             <div class="mb-3">
                                 <label for="expirationDate">Date d'expiration</label>
-                                <input type="date" id="expirationDate" name="expirationDate" required>
+                                <input type="date" th:field="*{payment.cardExpiry}" id="expirationDate" name="expirationDate" required>
                             </div>
                             <div class="mb-3">
                                 <label for="securityCode" class="form-label">Code de sécurité(CVV)</label>
-                                <input type="number" class="form-control" id="securityCode" minlength="3" maxlength="3"
+                                <input type="number" th:field="*{payment.cardCVV}" class="form-control" id="securityCode" minlength="3" maxlength="3"
                                        name="securityCode" required>
                             </div>
                             <button type="submit" class="btn btn-primary">Payer</button>
@@ -65,7 +65,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3>Récapitulatif de la commande</h3>
-                        <p th:text=" 'Nombre d article:'+ ${totalProducts}"></p>
+                        <p th:text=" 'Nombre d article:'+ ${itemQuantity}"></p>
                         <p th:text=" 'Montant total:' + ${totalPrice}"></p>
                     </div>
                 </div>
