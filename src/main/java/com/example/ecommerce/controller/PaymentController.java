@@ -32,25 +32,6 @@ public class PaymentController {
 
     @Autowired
     RoleService roleService;
-   /* @GetMapping("/payment")
-    public String showPaymentPage(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            model.addAttribute("user", user);
-            List<Product> productList = productService.getAllProducts();
-            model.addAttribute("products", productList);
-
-            double totalPrice = productService.calculateTotalPrice(productList);
-            model.addAttribute("totalPrice", totalPrice);
-
-            int totalProductSelected= productService.calculateProductQuantity();
-            model.addAttribute("totalProducts", totalProductSelected);
-
-            return "payment";
-        } else {
-            return "redirect:/login";
-        }
-    }*/
 
     @GetMapping("/payment")
     public String showPaymentTunnel(Model model, HttpSession session) {
@@ -75,8 +56,6 @@ public class PaymentController {
         }
     }
 
-
-
     @GetMapping("/payment-validated")
     public String showPaymentValidatedPage() {
         return "payment-validated";
@@ -97,7 +76,8 @@ public class PaymentController {
 
 
 
-  /*  @PostMapping("/payment")
+
+ /* @PostMapping("/payment")
     public String payTheOrder() {
         return "redirect:/payment-validated";
     }*/

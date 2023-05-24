@@ -20,7 +20,11 @@
       <p class="text-center">Nous procèderons à l'envoi dans les plus brefs délais</p>
     </div>
     <div>
-      <a class="btn btn-primary" href="shopping-cart" role="button">Retour</a>
+      <a class="btn btn-primary" href="products" role="button">Retour</a>
+    </div>
+
+    <div>
+      <a class="btn btn-primary" th:href="@{/order/{id}(id=${order.getIdOrder()}" role="button">Voir le détail de ma commande</a>
     </div>
   </div>
 </main>

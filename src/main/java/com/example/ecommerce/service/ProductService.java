@@ -37,38 +37,8 @@ public class ProductService {
         session.setAttribute("orderItems", orderItems);
     }
 
-   /* public double calculateTotalPrice(List<Product> productList){
-        double totalPrice = 0.0;
-        for (Product product : productList) {
-            if (product.isSelectedProduct()) {
-                totalPrice += product.getPriceProduct();
-            }
-        }
-        return totalPrice;
-    }*/
-
-    public int calculateProductQuantity(){
-        List<Product> productList = productRepository.findAll();
-        int productCount =0;
-        for (Product product : productList) {
-            if (product.isSelectedProduct()==true) {
-                productCount++;
-            }
-        }
-        return productCount;
+    public List<Product> searchProducts(String keyword) {
+        return productRepository.findByNameProductContainingOrDescriptionProductContainingOrCategory_NameCategoryContaining(keyword, keyword, keyword);
     }
 
-  /* fonction permettant le calcule des quantité de produits selectionnés
-
-   public int calculateProductQuantity(int quantity){
-        System.out.println(quantity);
-        List<Product> productList = productRepository.findAll();
-        int productQuantity = quantity;
-        for (Product product : productList) {
-            if (product.isSelectedProduct()) {
-                productQuantity+= product.getQuantity;
-            }
-        }
-        return productQuantity;
-    }*/
-}
+   }

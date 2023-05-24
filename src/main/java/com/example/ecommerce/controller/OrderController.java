@@ -16,7 +16,7 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/order/{orderId}")
+    @GetMapping("/order-details/{orderId}")
     public String getOrderDetails(@PathVariable int orderId, Model model) {
         Optional<Order> orderOptional = orderService.getOrderById(orderId);
         Order order = orderOptional.get();
