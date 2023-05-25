@@ -51,7 +51,7 @@ public class PaymentController {
         paymentService.savePayment(payment);
         orderService.updateOrder(order, totalAmount, payment, orderItems, authentication);
 
-        return "redirect:/order/" + order.getIdOrder();
+        return "redirect:/order-details/" + order.getIdOrder();
     }
 
 }

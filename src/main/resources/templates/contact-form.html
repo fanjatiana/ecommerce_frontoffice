@@ -18,7 +18,7 @@
                 <img class="w-100" src="/images/avatar2.jpg">
             </div>
             <div class="card-body">
-                <p>Bonjour <br> je suis {nom Admin)...,<br>que puis-je faire pour vous ?</p>
+                <h2>Utilisez ce formulaire pour contacter un administrateur</h2>
             </div>
         </div>
         <div class="row" style="width: 35%">
@@ -29,6 +29,11 @@
                     <input type="email" class="form-control" id="email" name="email" readonly
                            th:field="*{email}"
                            th:value="${user.email}">
+                </div>
+                <div class="mb-3 col-12 mt-2">
+                    <label for="adminName">Veuillez choisir un administrateur</label>
+                    <select class="form-select" aria-label="Default select example" name="adminName"
+                            id="adminName"></select>
                 </div>
                 <div class="mb-3 col-12">
                     <label for="userMessage" class="form-label fw-bold">Votre message</label>
@@ -42,5 +47,6 @@
     </div>
 </main>
 <div th:replace="~{components/footer :: footer}"></div>
+<script src="/js/fetchInfosAdmin.js"></script>
 </body>
 </html>

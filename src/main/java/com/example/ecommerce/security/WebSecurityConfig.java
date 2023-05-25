@@ -30,8 +30,8 @@ public class WebSecurityConfig {
         provider.setUserDetailsService(customUserDetailService());
         return provider;
     }
-    private static final String[] WHITELIST_RESSOURCES = {"/css/**", "/JS/**", "/images/**"};
-    private static final String[] BLACKLIST_RESSOURCES = {"/cart", "/payment","/order/**","profile","/account","/edit-profile","/my-orders","/order-details/**"};
+    private static final String[] WHITELIST_RESSOURCES = {"/css/**", "/js/**", "/images/**"};
+    private static final String[] BLACKLIST_RESSOURCES = {"/cart", "/payment","/order/**","profile","/account", "/contact-form","/edit-profile","/my-orders","/order-details/**","/thanks","/api/**"};
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
