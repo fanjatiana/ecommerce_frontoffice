@@ -26,8 +26,10 @@ public class OrderItemController {
         if (orderItems.isEmpty()) {
             return "redirect:/account";
         }
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         double total = orderItemService.calculateTotalPrice(orderItems);
         model.addAttribute("totalPrice", total);
+        model.addAttribute("itemQuantity", itemQuantity);
         model.addAttribute("orderItems", orderItems);
         return "cart";
     }
