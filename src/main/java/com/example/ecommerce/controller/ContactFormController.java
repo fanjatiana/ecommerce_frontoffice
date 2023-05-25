@@ -20,6 +20,7 @@ public class ContactFormController {
     public String showIdProfile(Model model) {
             int id = 1;
             Optional<User> optionalUser = userRepository.findById(id);
+
             if (optionalUser.isPresent()) {
                 User user = optionalUser.get();
                 model.addAttribute("user", user);

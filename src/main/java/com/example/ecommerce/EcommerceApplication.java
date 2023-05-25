@@ -43,16 +43,25 @@ public class EcommerceApplication implements CommandLineRunner {
         Product product3 = new Product("Sneackers", "sNous nous engageons à vous fournir des chaussures de qualité qui vous permettront de montrer facilement vos points forts en toutes occasions.", 180, false,"snackers.jpg",category3);
         productRepository.save(product3);
 
+        Role superAdmin = new Role("superAdmin");
+        roleRepository.save(superAdmin);
+
+        Role admin = new Role("admin");
+        roleRepository.save(admin);
+
+        Role admin2 = new Role("admin");
+        roleRepository.save(admin2);
 
 
-        User user1 = new User("John","azerty","Doe", "jDoe@email.com", "3 rue du chat 44000 Nantes", "0254879652",new Role("USER"));
+
+       /* User user1 = new User("John","azerty","Doe", "jDoe@email.com", "3 rue du chat 44000 Nantes", "0254879652",new Role("USER"));
         userRepository.save(user1);
         User admin1 = new User("Pierre","qwerty","P", "pP@email.com", "10 rue du chat 44000 Nantes", "0754879652",new Role("ADMIN"));
         userRepository.save(admin1);
         User admin2 = new User("Julie","qwerty","E", "jE@email.com", "13 rue du chat 44000 Nantes", "0954879652",new Role("ADMIN"));
         userRepository.save(admin2);
         User admin3 = new User("Idris","qwerty","F", "iF@email.com", "33 rue du chat 44000 Nantes", "0154879652",new Role("ADMIN"));
-        userRepository.save(admin3);
+        userRepository.save(admin3);*/
 
     }
 }
