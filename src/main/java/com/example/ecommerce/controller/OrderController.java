@@ -1,6 +1,8 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.Order;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +18,15 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/order-details/{orderId}")
     public String getOrderDetails(@PathVariable int orderId, Model model) {
         Optional<Order> orderOptional = orderService.getOrderById(orderId);
         Order order = orderOptional.get();
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         model.addAttribute("order", order);
         return "order-details";
     }
@@ -28,6 +34,8 @@ public class OrderController {
     @GetMapping("/my-orders")
     public String getAllMyOrders(Model model){
         List<Order> orderList = orderService.getAllOrders();
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         model.addAttribute("orders",orderList);
         return "my-orders";
     }

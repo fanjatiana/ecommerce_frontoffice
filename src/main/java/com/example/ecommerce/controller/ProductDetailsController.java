@@ -1,7 +1,9 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.OrderItem;
 import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.OrderItemService;
 import com.example.ecommerce.service.ProductService;
 import jakarta.servlet.http.HttpSession;
@@ -25,11 +27,15 @@ public class ProductDetailsController {
     private ProductService productService;
     @Autowired
     private OrderItemService orderItemService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/products/{productId}")
     public String getProductDetails(@PathVariable int productId, Model model) {
         Optional<Product> productOptional = productService.getProductById(productId);
         Product product = productOptional.get();
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         model.addAttribute("product", product);
         return "product-details";
     }

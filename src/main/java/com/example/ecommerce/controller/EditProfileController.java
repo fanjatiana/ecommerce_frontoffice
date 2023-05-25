@@ -1,8 +1,10 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.Role;
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.RoleService;
 import com.example.ecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -24,11 +27,15 @@ public class EditProfileController {
     @Autowired
     private RoleService roleService;
     @Autowired
+    private CategoryService categoryService;
+    @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/edit-profile")
     public String showEditProfileForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         if (authentication.isAuthenticated()) {
             User user = (User) authentication.getPrincipal();
             model.addAttribute("user", user);

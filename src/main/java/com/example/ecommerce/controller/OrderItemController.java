@@ -1,6 +1,8 @@
 package com.example.ecommerce.controller;
 
+import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.OrderItem;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.OrderItemService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,8 @@ public class OrderItemController {
 
     @Autowired
     private OrderItemService orderItemService;
-
+    @Autowired
+    private CategoryService categoryService;
     @GetMapping("/cart")
     public String getCartItems(Model model, Authentication authentication) {
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
@@ -28,6 +31,8 @@ public class OrderItemController {
         }
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         double total = orderItemService.calculateTotalPrice(orderItems);
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         model.addAttribute("totalPrice", total);
         model.addAttribute("itemQuantity", itemQuantity);
         model.addAttribute("orderItems", orderItems);

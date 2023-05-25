@@ -34,6 +34,8 @@ public class ProductController {
     @GetMapping("/products/cat/{categoryName}")
     public String getProductsByCategory(@PathVariable("categoryName") String categoryName, Model model) {
         List<Product> products = productService.getProductsByCategory(categoryName);
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         model.addAttribute("products", products);
         return "products";
     }

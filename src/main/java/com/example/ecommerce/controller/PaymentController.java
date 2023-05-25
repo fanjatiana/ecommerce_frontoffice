@@ -1,6 +1,7 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.*;
+import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.OrderItemService;
 import com.example.ecommerce.service.OrderService;
 import com.example.ecommerce.service.PaymentService;
@@ -26,6 +27,8 @@ public class PaymentController {
     private OrderService orderService;
     @Autowired
     private OrderItemService orderItemService;
+    @Autowired
+    private CategoryService categoryService;
 
     @GetMapping("/payment")
     public String showPaymentTunnel(Model model, Authentication authentication) {
@@ -35,6 +38,8 @@ public class PaymentController {
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
         double totalAmount = orderService.calculateTotalAmount(orderItems);
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         model.addAttribute("totalPrice", totalAmount);
         model.addAttribute("itemQuantity", itemQuantity);
         model.addAttribute("paymentForm", paymentForm);
@@ -50,7 +55,6 @@ public class PaymentController {
         payment.setDatePayment(new Date());
         paymentService.savePayment(payment);
         orderService.updateOrder(order, totalAmount, payment, orderItems, authentication);
-
         return "redirect:/order-details/" + order.getIdOrder();
     }
 
