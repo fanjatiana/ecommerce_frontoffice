@@ -8,11 +8,14 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor(force = true)
-@RequiredArgsConstructor
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRole;
     @NonNull
     private String roleName;
+
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
 }

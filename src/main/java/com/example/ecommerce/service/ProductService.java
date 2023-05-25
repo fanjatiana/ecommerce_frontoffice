@@ -1,5 +1,6 @@
 package com.example.ecommerce.service;
 
+import com.example.ecommerce.entity.Category;
 import com.example.ecommerce.entity.OrderItem;
 import com.example.ecommerce.entity.Product;
 import com.example.ecommerce.repository.ProductRepository;
@@ -17,7 +18,7 @@ public class ProductService {
     @Autowired
     ProductRepository productRepository;
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
@@ -25,6 +26,7 @@ public class ProductService {
     public Optional<Product> getProductById(int id) {
         return productRepository.findById(id);
     }
+
     public void addToCart(int productId, int quantity, HttpSession session) {
         Optional<Product> productOptional = productRepository.findById(productId);
         Product product = productOptional.get();
@@ -41,4 +43,10 @@ public class ProductService {
         return productRepository.findByNameProductContainingOrDescriptionProductContainingOrCategory_NameCategoryContaining(keyword, keyword, keyword);
     }
 
-   }
+    public List<Product> getProductsByCategory(String categoryName) {
+        return productRepository.findByCategoryNameCategory(categoryName);
+    }
+
+
+
+}
