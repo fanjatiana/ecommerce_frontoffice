@@ -31,7 +31,7 @@ public class WebSecurityConfig {
         return provider;
     }
     private static final String[] WHITELIST_RESSOURCES = {"/css/**", "/js/**", "/images/**"};
-    private static final String[] BLACKLIST_RESSOURCES = {"/cart", "/payment","/order/**","profile","/account", "/contact-form","/edit-profile","/my-orders","/order-details/**","/thanks","/api/**"};
+    private static final String[] BLACKLIST_RESSOURCES = {"/cart/**", "/payment","/order/**","profile","/account", "/contact-form","/edit-profile","/my-orders","/order-details/**","/thanks","/api/**"};
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                     logout
                             .permitAll()
                             .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                            .logoutSuccessUrl("/");
+                            .logoutSuccessUrl("/login");
                 })
                 .build();
     }
