@@ -1,8 +1,5 @@
 package com.example.ecommerce.entity;
-
 import jakarta.persistence.*;
-
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -14,7 +11,7 @@ public class Category {
     private String nameCategory;
     private String descriptionCategory;
 
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category",  cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category() {

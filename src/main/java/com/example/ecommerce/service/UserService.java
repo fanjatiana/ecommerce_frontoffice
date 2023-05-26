@@ -6,14 +6,23 @@ import com.example.ecommerce.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User AddUser() {
-        User user1 = new User("Pierre", "petitchat44", "Bateau", "pierreB@Email.com", "36 rue du chateau 44000 Nantes", "0240257895");
-        return userRepository.save(user1);
+
+    public void save(User user) {
+        userRepository.save(user);
     }
+    public Optional<User> findById(int id) {
+        return findById(id);
+    }
+
 
 }
