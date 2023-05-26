@@ -56,11 +56,6 @@ public class PaymentController {
         }
     }
 
-    @GetMapping("/payment-validated")
-    public String showPaymentValidatedPage() {
-        return "payment-validated";
-    }
-
     @PostMapping("/payment")
     public String makePayment(@ModelAttribute("paymentForm") PaymentForm paymentForm,
                               HttpSession session) {
@@ -76,6 +71,13 @@ public class PaymentController {
 
 
 
+ /*   @GetMapping("/payment-validated")
+    public String showPaymentValidatedPage() {
+        return "payment-validated";
+    }*/
+
+
+
 
  /* @PostMapping("/payment")
     public String payTheOrder() {
@@ -83,7 +85,7 @@ public class PaymentController {
     }*/
 
 
-    @GetMapping("/edit-delivery-address")
+  /*  @GetMapping("/edit-delivery-address")
     public String showEditDeliveryAddressForm(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
@@ -106,6 +108,6 @@ public class PaymentController {
             return "redirect:/payment"; // Redirect to a confirmation page or any other desired page
         }
 
-
+*/
 
 }

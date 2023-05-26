@@ -28,7 +28,7 @@ public class AdminRestController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<UserDto>> getAllUserByRoles() {
-        List<User> userList = userRepository.findByRole_IdRole(2);
+        List<User> userList = userRepository.findByRole_IdRole(3);
         List<UserDto> userDtoList = userList.stream()
                 .map(user -> {
                     UserDto userDto = new UserDto();
