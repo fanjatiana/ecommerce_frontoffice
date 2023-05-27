@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/roles")
 public class AdminRestController {
-    @Autowired
-    private UserService userService;
+   /* @Autowired
+    private UserService userService;*/
 
     @Autowired
     private UserRepository userRepository;

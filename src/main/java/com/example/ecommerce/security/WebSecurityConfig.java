@@ -48,7 +48,7 @@ public class WebSecurityConfig {
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .permitAll()
-                            .defaultSuccessUrl("/profile");
+                            .defaultSuccessUrl("/products");
                 })
                 .logout(logout->{
                     logout
