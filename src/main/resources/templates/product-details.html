@@ -5,45 +5,58 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/styles.css">
     <title>Détail du produit</title>
 </head>
 <body>
 <div th:replace="~{components/header :: header}"></div>
 <main>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row mt-4 mb-3">
             <h2>Product Details</h2>
         </div>
-        <div class="card mb-3 shadow-sm p-3 mb-5 bg-body rounded" style="max-width: 80%">
-            <div class="ms-3 me-3 mt-3 mb-3 row g-0">
-                <div class="col-md-4 d-flex align-items-center">
-                    <!-- <img th:src="${product.photoProduct}" alt="Product Photo" width="100" height="100">-->
-                    <img th:src="@{'~/images/' + ${product.photoProduct}}" th:alt="${product.nameProduct}" width="100px">
-                </div>
-                <div class="col-md-8 d-flex align-items-center">
-                    <div class="card-body col-8">
-                        <div>
-                            <h3 th:text="${product.nameProduct}"></h3>
-                            <h5 th:text="${product.category.nameCategory}"></h5>
-                            <p th:text="${product.descriptionProduct}"></p>
-                            <p>Price: <span th:text="${product.PriceProduct}"></span></p>
-                        </div>
-                        <div>
-                            <form th:action="@{/products/{productId}/addToCart(productId=${product.idProduct})}" method="post">
-                                <div>
-                                    <label for="quantity">Quantité</label>
-                                    <input type="number" name="quantity" id="quantity" min="1" value="1" required style="width: 20%">
-                                    <button class="btn btn-primary" type="submit">Ajouter au panier</button>
-                                </div>
-                            </form>
-                        </div>
+        <div class="d-flex justify-content-around">
+            <div class="card mb-3 shadow-sm p-3 mb-5 bg-body rounded col-7" style="max-width: 80%">
+                <div class="ms-3 me-3 mt-3 mb-3 row g-0">
+                    <div class="col-md-4 d-flex align-items-center">
+                        <!-- <img th:src="${product.photoProduct}" alt="Product Photo" width="100" height="100">-->
+                        <img th:src="@{'~/images/' + ${product.photoProduct}}" th:alt="${product.nameProduct}" width="100px">
                     </div>
-                    <div class=" ms-4 col-4">
-
+                    <div class="col-md-8 d-flex align-items-center">
+                        <div class="card-body col-8">
+                            <div>
+                                <h3 th:text="${product.nameProduct}"></h3>
+                                <h5 th:text="${product.category.nameCategory}"></h5>
+                                <p th:text="${product.descriptionProduct}"></p>
+                                <p>Price: <span th:text="${product.PriceProduct}"></span></p>
+                            </div>
+                            <div>
+                                <form th:action="@{/products/{productId}/addToCart(productId=${product.idProduct})}" method="post">
+                                    <div th:if="${#authorization.expression('isAuthenticated()')}">
+                                        <label for="quantity">Quantité</label>
+                                        <input type="number" name="quantity" id="quantity" min="1" value="1" required style="width: 20%">
+                                        <button class="btn btn-primary" type="submit">Ajouter au panier</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-3" th:unless="${#authorization.expression('isAuthenticated()')}">
+                <div>
+                    <p>Connectez vous ou inscrivez vous pour commander cet article</p>
+                </div>
+                <div class="d-flex flex-column">
+                    <a href="login" class="btn btn-primary" >Se connecter</a>
+                    <a href="signup" class="btn btn-primary" >S'enregistrer</a>
+                </div>
+
+            </div>
         </div>
+
+
     </div>
 </main>
 <div th:replace="~{components/footer :: footer}"></div>
