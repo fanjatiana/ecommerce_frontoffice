@@ -39,13 +39,13 @@ public class PaymentController {
         double totalAmount = orderService.calculateTotalAmount(orderItems);
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         List<Category> categoryNames = categoryService.getAllCategory();
-        if(orderItems != null && categoryNames != null){
+        if (orderItems != null && categoryNames != null) {
             model.addAttribute("categoryNames", categoryNames);
             model.addAttribute("totalPrice", totalAmount);
             model.addAttribute("itemQuantity", itemQuantity);
             model.addAttribute("paymentForm", paymentForm);
             return "payment";
-        }else{
+        } else {
             return "redirect:/404";
         }
 
