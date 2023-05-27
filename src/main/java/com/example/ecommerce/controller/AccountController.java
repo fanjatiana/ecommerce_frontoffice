@@ -17,7 +17,11 @@ public class AccountController {
     @GetMapping("/account")
     public String showAccount(Model model) {
         List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        return "account";
+        if(categoryNames != null){
+            model.addAttribute("categoryNames", categoryNames);
+            return "account";
+        } else {
+            return "redirect:/404";
+        }
     }
 }

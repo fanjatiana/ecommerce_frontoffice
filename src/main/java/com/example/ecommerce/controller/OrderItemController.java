@@ -26,17 +26,19 @@ public class OrderItemController {
     @GetMapping("/cart")
     public String getCartItems(Model model, Authentication authentication) {
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
-        if (orderItems.isEmpty()) {
-            return "redirect:/account";
-        }
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         double total = orderItemService.calculateTotalPrice(orderItems);
         List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        model.addAttribute("totalPrice", total);
-        model.addAttribute("itemQuantity", itemQuantity);
-        model.addAttribute("orderItems", orderItems);
-        return "cart";
+        if(orderItems != null && categoryNames != null){
+            model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("totalPrice", total);
+            model.addAttribute("itemQuantity", itemQuantity);
+            model.addAttribute("orderItems", orderItems);
+            return "cart";
+        }else{
+            return "redirect:/404";
+        }
+
     }
 
     @PostMapping("/cart/{productId}/remove")

@@ -39,7 +39,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(requests -> {
                     requests
                             .requestMatchers(WHITELIST_RESSOURCES).permitAll()
-                            .requestMatchers("/signup","/login","/products/**","/error").permitAll()
+                            .requestMatchers("/signup","/login","/products/**","/error", "/404").permitAll()
                             .requestMatchers(BLACKLIST_RESSOURCES).authenticated();
                 })
                 .formLogin(form ->{

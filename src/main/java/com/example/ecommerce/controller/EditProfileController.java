@@ -41,21 +41,26 @@ public class EditProfileController {
             model.addAttribute("user", user);
             return "edit-profile";
         } else {
-            model.addAttribute("errorMessage", "User not found");
-            return "profile";
+            return "redirect:/404";
         }
     }
+
     @PostMapping("/edit-profile")
     public String updateProfile(@ModelAttribute("user") User user, Model model) {
         Optional<Role> clientRole = roleService.findById(3);
-        user.setRole(clientRole.orElse(null));
-        String encodedPassword = passwordEncoder.encode(user.getPassword());
-        user.setPassword(encodedPassword);
-        userService.save(user);
-        model.addAttribute("user", user);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Authentication newAuthentication = new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), authentication.getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(newAuthentication);
-        return "redirect:/profile";
+        if (clientRole.isPresent()) {
+            user.setRole(clientRole.orElse(null));
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            userService.save(user);
+            model.addAttribute("user", user);
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            Authentication newAuthentication = new UsernamePasswordAuthenticationToken(user, authentication.getCredentials(), authentication.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(newAuthentication);
+            return "redirect:/profile";
+        } else {
+            return "redirect:/404";
+        }
+
     }
 }

@@ -41,6 +41,7 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     @ManyToOne
+    @NonNull
     private Role role;
 
     @Override

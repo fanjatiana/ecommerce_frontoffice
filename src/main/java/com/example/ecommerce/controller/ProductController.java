@@ -25,19 +25,30 @@ public class ProductController {
     @GetMapping("/products")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
-        List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        return "products";
+        if(products != null){
+            model.addAttribute("products", products);
+            List<Category> categoryNames = categoryService.getAllCategory();
+            model.addAttribute("categoryNames", categoryNames);
+            return "products";
+        }else{
+            return "redirect:/404";
+        }
+
     }
 
     @GetMapping("/products/cat/{categoryName}")
     public String getProductsByCategory(@PathVariable("categoryName") String categoryName, Model model) {
         List<Product> products = productService.getProductsByCategory(categoryName);
         List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        model.addAttribute("products", products);
-        return "products";
+        if(products != null && categoryNames != null){
+            model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("products", products);
+            return "products";
+        }else{
+            return "redirect:/404";
+        }
+
+
     }
 
 

@@ -32,7 +32,7 @@ public class ProfileController {
             model.addAttribute("user", user);
             return "profile";
         } else {
-            return "redirect:/login";
+            return "redirect:/404";
         }
     }
 }

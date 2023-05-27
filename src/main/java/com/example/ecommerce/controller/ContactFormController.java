@@ -33,7 +33,7 @@ public class ContactFormController {
             model.addAttribute("user", user);
             return "contact-form";
         } else {
-            return "redirect:/account";
+            return "redirect:/404";
         }
     }
 
@@ -46,6 +46,4 @@ public class ContactFormController {
     public String PostMessage() {
         return "thanks";
     }
-
-
 }

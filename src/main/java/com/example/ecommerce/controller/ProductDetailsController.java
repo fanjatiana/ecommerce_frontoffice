@@ -35,15 +35,25 @@ public class ProductDetailsController {
         Optional<Product> productOptional = productService.getProductById(productId);
         Product product = productOptional.get();
         List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        model.addAttribute("product", product);
-        return "product-details";
+        if (productOptional.isPresent() && categoryNames != null) {
+            model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("product", product);
+            return "product-details";
+        } else {
+            return "redirect:/404";
+        }
+
     }
 
     @PostMapping("/products/{productId}/addToCart")
     public String addToCart(@PathVariable int productId, @RequestParam int quantity, Authentication authentication) {
-        orderItemService.addToCart(authentication, productId, quantity);
-        return "redirect:/products/{productId}";
+        if (authentication != null) {
+            orderItemService.addToCart(authentication, productId, quantity);
+            return "redirect:/products/{productId}";
+        } else {
+            return "redirect:/login";
+        }
+
     }
 }
 

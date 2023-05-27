@@ -49,14 +49,15 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(Model model, @Valid @ModelAttribute("user") User user,  BindingResult bindingResult) {
         Optional<Role> clientRole = roleService.findById(3);
-        user.setRole(clientRole.orElse(null));
+        Optional<Role> admin = roleService.findById(2);
+        Optional<Role> superAdmin = roleService.findById(1);
+        user.setRole(admin.orElse(null));
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
+        userService.save(user);
         if (bindingResult.hasErrors()) {
             return "signup";
         }
-        userService.save(user);
-
         return "redirect:/login";
     }
 

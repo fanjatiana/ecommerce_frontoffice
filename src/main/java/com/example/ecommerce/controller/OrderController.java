@@ -26,17 +26,25 @@ public class OrderController {
         Optional<Order> orderOptional = orderService.getOrderById(orderId);
         Order order = orderOptional.get();
         List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        model.addAttribute("order", order);
-        return "order-details";
+        if(orderOptional.isPresent() && categoryNames != null){
+            model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("order", order);
+            return "order-details";
+        }else{
+            return "redirect:/404";
+        }
     }
 
     @GetMapping("/my-orders")
     public String getAllMyOrders(Model model){
         List<Order> orderList = orderService.getAllOrders();
         List<Category> categoryNames = categoryService.getAllCategory();
-        model.addAttribute("categoryNames", categoryNames);
-        model.addAttribute("orders",orderList);
-        return "my-orders";
+        if(orderList != null && categoryNames != null){
+            model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("orders",orderList);
+            return "my-orders";
+        }else{
+            return "redirect:/404";
+        }
     }
 }
