@@ -1,0 +1,9 @@
+.text-danger {
+    color: red;
+}
+
+.error-message {
+    display: block;
+    color: red;
+    margin-top: 5px;
+}

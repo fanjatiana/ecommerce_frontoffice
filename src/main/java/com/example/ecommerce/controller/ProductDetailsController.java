@@ -47,11 +47,11 @@ public class ProductDetailsController {
 
     @PostMapping("/products/{productId}/addToCart")
     public String addToCart(@PathVariable int productId, @RequestParam int quantity, Authentication authentication) {
-        if (authentication != null) {
+        if (authentication != null && quantity != 0) {
             orderItemService.addToCart(authentication, productId, quantity);
             return "redirect:/products/{productId}";
         } else {
-            return "redirect:/login";
+            return "redirect:/404";
         }
 
     }

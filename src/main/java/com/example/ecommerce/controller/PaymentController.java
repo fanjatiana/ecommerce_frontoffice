@@ -5,11 +5,15 @@ import com.example.ecommerce.service.CategoryService;
 import com.example.ecommerce.service.OrderItemService;
 import com.example.ecommerce.service.OrderService;
 import com.example.ecommerce.service.PaymentService;
-import jakarta.servlet.http.HttpSession;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,17 +39,22 @@ public class PaymentController {
         PaymentForm paymentForm = new PaymentForm();
         paymentForm.setOrder(new Order());
         paymentForm.setPayment(new Payment());
+
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
         double totalAmount = orderService.calculateTotalAmount(orderItems);
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         List<Category> categoryNames = categoryService.getAllCategory();
+
         if (orderItems != null && categoryNames != null) {
+            // La quantité et le montant total sont supérieurs ou égaux à 1, afficher la page de paiement
             model.addAttribute("categoryNames", categoryNames);
             model.addAttribute("totalPrice", totalAmount);
             model.addAttribute("itemQuantity", itemQuantity);
             model.addAttribute("paymentForm", paymentForm);
+
             return "payment";
         } else {
+            // La quantité ou le montant total est inférieur à 1, rediriger vers une page appropriée
             return "redirect:/404";
         }
 
@@ -57,11 +66,14 @@ public class PaymentController {
         double totalAmount = orderService.calculateTotalAmount(orderItems);
         Order order = paymentForm.getOrder();
         Payment payment = paymentForm.getPayment();
-        payment.setDatePayment(new Date());
-        paymentService.savePayment(payment);
-        orderService.updateOrder(order, totalAmount, payment, orderItems, authentication);
-        return "redirect:/order-details/" + order.getIdOrder();
-    }
+        if (order != null && payment !=null) {
+            payment.setDatePayment(new Date());
+            paymentService.savePayment(payment);
+            orderService.updateOrder(order, totalAmount, payment, orderItems, authentication);
+            return "redirect:/order-details/" + order.getIdOrder();
+        }
+        return "redirect:/404";
 
+    }
 }
 
