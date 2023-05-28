@@ -10,13 +10,11 @@
 <body>
 <div th:replace="~{components/header :: header}"></div>
 <main>
-
     <div th:if="${totalPrice >= 1 && itemQuantity >= 1}">
         <div class="container-fluid">
             <div class="mt-4 mb-4">
                 <h2>Passer la commande</h2>
             </div>
-
             <form th:action="@{/payment}" method="post" th:object="${paymentForm}">
                 <div class="d-flex justify-content-around align-items-sm-start col-12">
                     <div class="card mt-3 mb-3 col-4">
@@ -71,7 +69,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="card mt-3 mb-3 col-3">
                         <div class="card-body">
                             <div class="d-flex justify-content-between  row">
@@ -124,7 +121,8 @@
         </div>
     </div>
 
-    <div class="container-fluid d-flex flex-column align-items-center" th:unless="${totalPrice >= 1 && itemQuantity >= 1}">
+    <div class="container-fluid d-flex flex-column align-items-center"
+         th:unless="${totalPrice >= 1 && itemQuantity >= 1}">
         <div>
             <img src="/images/stop.jpg" class="img-fluid rounded-start" alt="felicitations">
         </div>
@@ -135,7 +133,6 @@
         <div class="d-flex justify-content-center">
             <a th:href="@{/products}" class="btn btn-primary">Accéder aux articles</a>
         </div>
-    </div>
     </div>
 </main>
 <div th:replace="~{components/footer :: footer}"></div>

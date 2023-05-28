@@ -61,7 +61,7 @@ public class PaymentController {
     }
 
     @PostMapping("/payment")
-    public String makePayment(@ModelAttribute("paymentForm") PaymentForm paymentForm, Authentication authentication) {
+    public String makePayment(@Valid @ModelAttribute("paymentForm") PaymentForm paymentForm, Authentication authentication) {
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
         double totalAmount = orderService.calculateTotalAmount(orderItems);
         Order order = paymentForm.getOrder();

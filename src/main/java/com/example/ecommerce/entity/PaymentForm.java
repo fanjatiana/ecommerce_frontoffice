@@ -1,5 +1,6 @@
 package com.example.ecommerce.entity;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

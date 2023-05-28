@@ -21,6 +21,7 @@ import java.util.Optional;
 public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idUser;
+
     @NonNull
     @Pattern(regexp = "^[A-Za-z]+(?:-[A-Za-z]+)?(?: [A-Za-z]+(?:-[A-Za-z]+)?)?$", message = "Prénom d'utilisateur non valide (autorisés : lettres,espace, caractères spéciaux (-))")
     private String username;
