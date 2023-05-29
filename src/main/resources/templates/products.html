@@ -9,37 +9,57 @@
     <link rel="stylesheet" href="/css/footer.css">
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/products.css">
+    <link rel="stylesheet" href="/css/header.css">
 </head>
-<div th:replace="~{components/header :: header}"  th:with="productsQuantity=${productsQuantity}"></div>
+<div th:replace="~{components/header :: header}" th:with="productsQuantity=${productsQuantity}"></div>
 <main>
-    <div class="container container-fluid mt-5">
-        <div class="row mt-4 mb-3">
-            <h2 class="ms-5">Liste des produits</h2>
+    <div class="container-fluid container-products mb-4">
+
+
+        <div class="d-flex justify-content-center align-items-center mt-5" th:if="${#lists.isEmpty(products)} ">
+            <p class="text-center">Aucun produit trouvé.</p>
         </div>
-        <div th:if="${#lists.isEmpty(products)}" class="text-center">
-            <p>Aucun produit trouvé.</p>
-        </div>
-        <div class="flex justify-content-around flex-wrap row mt-4 " th:if="${not #lists.isEmpty(products)}">
-            <div class="card p-2 mb-5 me-2 ms-2  col-md-6 col-lg-4 col-xl-3 shadow-sm"
-                 th:each="product : ${products} ">
-                <div class="col-12 mb-1  d-flex flex-column">
-                    <!-- <img th:src="${product.photoProduct}" alt="Product Photo" width="100" height="100">-->
-                    <img class="card-img-top" th:src="@{'~/images/' + ${product.photoProduct}}"
-                         th:alt="${product.nameProduct}"
-                         width="100%">
-                </div>
-                <div class=" col-12 pt-0 pb-0 card-body d-flex flex-column">
-                    <h6 class="card-title" th:text="${product.nameProduct} + '-' + ${product.category.nameCategory} "></h6>
-                    <p class="card-title" th:text="${product.descriptionProduct}"></p>
-                    <p class="card-text" th:text="${product.priceProduct}+ '€'"></p>
-                    <a th:href="@{/products/{productId}(productId=${product.idProduct})}"
-                       class=" stretched-link"></a>
+
+
+        <div class="col-xl-12" th:if="${not #lists.isEmpty(products)}">
+            <div class="row">
+                <div class="card banner-card bg-dark text-white rounded-0 border-0 mb-4 col-12">
+                    <img src="/images/w.jpg" class="img-fluid" alt="image chaussures" style="max-height: 400px; width: 100%">
+                    <div class="card-img-overlay">
+                        <h2 class="card-title">Toute la mode à vos pieds </h2>
+                    </div>
                 </div>
             </div>
+
+
+            <div class="row flex justify-content-around flex-wrap ">
+                <div class="card product-card p-2 mb-5 me-2 ms-2 mt-3  col-md-6 col-lg-4 col-xl-3 shadow-sm"
+                     th:each="product : ${products} ">
+                    <div class="col-12 mb-1  d-flex flex-column">
+                        <img class="card-img-top" src="/images/shoes.jpg" width="100%">
+                        <!-- <img th:src="${product.photoProduct}" alt="Product Photo" width="100" height="100">-->
+                        <!--<img class="card-img-top" th:src="@{'~/images/' + ${product.photoProduct}}"
+                             th:alt="${product.nameProduct}"
+                             width="100%">-->
+                    </div>
+                    <div class=" col-12 pt-0 pb-0 card-body d-flex flex-column">
+                        <div>
+                            <h6 class="card-title"
+                                th:text="${product.nameProduct} + '-' + ${product.category.nameCategory} "></h6>
+                            <p class="card-title" th:text="${product.descriptionProduct}"></p>
+                        </div>
+                        <div class="product-price">
+                            <p class="card-text " th:text="${product.priceProduct}+ '€'"></p>
+                        </div>
+                        <a th:href="@{/products/{productId}(productId=${product.idProduct})}"
+                           class=" stretched-link"></a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </main>
-
 <div th:replace="~{components/footer :: footer}"></div>
 </body>
 </html>

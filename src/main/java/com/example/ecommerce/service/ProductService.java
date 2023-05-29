@@ -37,10 +37,8 @@ public class ProductService {
     public List<Product> searchProducts(String keyword) {
         return productRepository.findByNameProductContainingOrDescriptionProductContainingOrCategory_NameCategoryContaining(keyword, keyword, keyword);
     }
+
     public List<Product> getProductsByCategory(String categoryName) {
         return productRepository.findByCategory_NameCategory(categoryName);
     }
-
-
-
 }

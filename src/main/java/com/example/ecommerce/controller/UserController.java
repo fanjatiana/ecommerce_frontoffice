@@ -21,10 +21,8 @@ public class UserController {
     UserDetailsServiceImpl userDetailsService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private RoleService roleService;
 
@@ -43,18 +41,13 @@ public class UserController {
     @PostMapping("/signup")
     public String signup(Model model, @Valid @ModelAttribute("user") User user, BindingResult bindingResult) {
         Optional<Role> clientRole = roleService.findById(3);
-       /* Optional<Role> admin = roleService.findById(2);
-        Optional<Role> superAdmin = roleService.findById(1);*/
-
         user.setRole(clientRole.orElse(null));
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-
         if (bindingResult.hasErrors()) {
             return "signup";
         }
         userService.save(user);
         return "redirect:/login";
     }
-
 }

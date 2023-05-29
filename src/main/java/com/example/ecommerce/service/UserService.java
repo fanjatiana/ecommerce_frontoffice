@@ -15,14 +15,10 @@ import java.util.stream.Collectors;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
-
-
     public void save(User user) {
         userRepository.save(user);
     }
     public Optional<User> findById(int id) {
         return findById(id);
     }
-
-
 }

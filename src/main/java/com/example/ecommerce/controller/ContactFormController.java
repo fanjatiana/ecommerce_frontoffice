@@ -49,6 +49,8 @@ public class ContactFormController {
     public String showThanksPage(Authentication authentication,Model model) {
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+        List<Category> categoryNames = categoryService.getAllCategory();
+        model.addAttribute("categoryNames", categoryNames);
         if(itemQuantity > -1){
             model.addAttribute("productsQuantity", itemQuantity);
         }

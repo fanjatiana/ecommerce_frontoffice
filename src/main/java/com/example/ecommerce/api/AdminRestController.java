@@ -20,9 +20,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/roles")
 public class AdminRestController {
-   /* @Autowired
-    private UserService userService;*/
-
     @Autowired
     private UserRepository userRepository;
 
@@ -40,13 +37,4 @@ public class AdminRestController {
 
         return ResponseEntity.ok(userDtoList);
     }
-
-
-//   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<List<User>> getAllUserByRoles() {
-//        List<User> userList = userRepository.findByRole_IdRole(2);
-//        return ResponseEntity.ok(userList);
-//    }
-
-
 }

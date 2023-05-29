@@ -27,8 +27,6 @@ public class ProductController {
     private CategoryService categoryService;
     @Autowired
     private OrderItemService orderItemService;
-    @Autowired
-    private OrderItemRepository orderItemRepository;
 
     @GetMapping("/products")
     public String getAllProducts(Model model, Authentication authentication) {
@@ -68,24 +66,6 @@ public class ProductController {
 
 
     }
-
-
-    /* display ramdom category
-
-    @GetMapping("/home")
-            public String getCategorys(Model model){
-            List<Category> categorys = categoryService.fetchRandomCategorys(5);
-            model.addAttribute("categorys", categorys);
-            return "home";
-    }*/
-
-    /* display category list
-    @GetMapping("/home")
-    public String getCategorys(Model model){
-        List<Category> categorys = categoryService.fetchRandomCategorys(5);
-        model.addAttribute("categorys", categorys);
-        return "home";
-    }*/
 
 
     @PostMapping("/products/search")

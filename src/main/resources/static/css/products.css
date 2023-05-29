@@ -4,7 +4,33 @@ p{
     overflow: hidden;
     text-overflow: ellipsis;
 }
-.card:hover {
+.product-card:hover {
     transform: scale(1.05);
     transition: transform 0.3s ease;
+}
+
+.product-price{
+    border: 1px whitesmoke solid ;
+    background-color: #596d7c;
+    border-radius: 5%;
+    padding: 0.5em;
+    width: 4em;
+}
+
+.product-price p {
+    color:#FFFF;
+}
+
+
+.product-price-details{
+    border: 1px whitesmoke solid ;
+    background-color: #596d7c;
+    border-radius: 5%;
+    padding: 0.6em;
+    width: 5em;
+}
+
+.product-price-details p{
+    margin-bottom: 0;
+    color: #ffff;
 }

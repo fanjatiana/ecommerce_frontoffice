@@ -1,0 +1,23 @@
+header{
+    width: 100%;
+}
+
+.selected-count{
+   color: green;
+    font-weight: bold;
+}
+
+.cart-icon{
+    width: 1.8rem;
+    margin-right: 1em;
+}
+.nav-item{
+   color:#000;
+}
+.all-products:hover , .category:hover{
+    color:#FFFF;
+}
+
+.username{
+font-weight: bold;
+}
