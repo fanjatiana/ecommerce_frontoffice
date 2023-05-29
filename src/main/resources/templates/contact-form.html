@@ -26,6 +26,7 @@
                     <input type="email" class="form-control" id="email" name="email" readonly
                            th:field="*{email}"
                            th:value="${user.email}">
+                    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
                 </div>
                 <div class="mb-3 col-12 mt-2">
                     <label for="adminName">Veuillez choisir un administrateur</label>
@@ -34,7 +35,7 @@
                 </div>
                 <div class="mb-3 col-12">
                     <label for="userMessage" class="form-label fw-bold">Votre message</label>
-                    <textarea class="form-control" id="userMessage" rows="3"  name="userMessage"required></textarea>
+                    <textarea class="form-control" id="userMessage" rows="3"  name="userMessage" pattern="[A-Za-z0-9\s]+" required></textarea>
                 </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary btn-sm">Envoyer</button>

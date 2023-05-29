@@ -1,5 +1,8 @@
 const getAllAdmin = () => {
-    fetch('/api/roles')
+    // const baseUrl = window.location.href.split('/').slice(0, 4).join('/');
+    // const url = `${baseUrl}/api/roles`;
+    const url = `/api/roles`;
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log(data)
