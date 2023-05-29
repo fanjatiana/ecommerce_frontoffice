@@ -26,11 +26,11 @@
                         <form action="#" th:action="@{/login}" method="post">
                             <div class="mb-3">
                                 <label for="username">Identifiant:</label>
-                                <input type="text" id="username" name="username" class="form-control" required>
+                                <input type="text" id="username" name="username" class="form-control" required pattern="^[A-Za-z0-9\s-]+$" title="username invalide">
                             </div>
                             <div class="mb-3">
                                 <label for="password">Mot de passe:</label>
-                                <input type="password" id="password" name="password" class="form-control" required>
+                                <input type="password" id="password" name="password" class="form-control" required pattern="^[A-Za-z0-9\s-]+$" title="password invalide">
                             </div>
                             <div class="mb-3 col-12 mt-3">
                                 <button type="submit" class="btn btn-dark">Se connecter</button>

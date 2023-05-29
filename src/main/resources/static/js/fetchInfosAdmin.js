@@ -1,5 +1,7 @@
 const getAllAdmin = () => {
-    fetch('/api/roles')
+    const baseUrl = window.location.href.split('/').slice(0, 4).join('/');
+    const url = `${baseUrl}/api/roles`;
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -14,5 +16,4 @@ const getAllAdmin = () => {
             console.error('Une erreur s\'est produite:', error);
         });
 }
-
 getAllAdmin();

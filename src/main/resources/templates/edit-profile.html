@@ -29,38 +29,45 @@
                     <div class="row">
                         <input type="hidden" th:field="*{idUser}" name="id_user"/>
                         <div class="mb-3 col-12">
-                            <label for="username" class="form-label fw-bold">Prénom</label>
+                            <label for="username" class="form-label fw-bold">Username</label>
                             <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
-                                   required>
+                                   required pattern="^[A-Za-z\s-]+$" title="Nom d'utilisateur non valide">
+                            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error-message"></span>
                         </div>
                         <div class="mb-3 col-12">
                             <label for="fullname" class="form-label fw-bold">Nom</label>
                             <input type="text" class="form-control" id="fullname" name="full_name"
                                    th:field="*{fullName}"
-                                   required>
+                                   required pattern="^[A-Za-z\s-]+$" title="Nom non valide">
+                            <span th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" class="error-message"></span>
                         </div>
                         <div class="mb-3 col-12">
                             <label for="address" class="form-label fw-bold">Adresse</label>
                             <input type="text" class="form-control" id="address" name="address" th:field="*{address}"
-                                   required>
+                                   required pattern="^[A-Za-z0-9\s-]+$" title="adresse non valide">
+                            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="error-message"></span>
                         </div>
                         <div class="mb-3 col-12">
                             <label for="phoneNumber" class="form-label fw-bold">Téléphone</label>
                             <input type="text" class="form-control" id="phoneNumber" name="phone_number"
                                    th:field="*{phoneNumber}"
-                                   required>
+                                   required pattern="[0-9]{10}" minlength="10" maxlength="10" title="Numéro de téléphone non valide">
+                            <span th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}" class="error-message"></span>
                         </div>
                         <div class="mb-3 col-12">
                             <label for="email" class="form-label fw-bold">Email</label>
                             <input type="email" class="form-control" id="email" name="email"
                                    th:field="*{email}"
-                                   th:value="${user.email}">
+                                   th:value="${user.email}"
+                                   required title="Nom de client invalide">
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
                         </div>
                         <div class="mb-3 col-12">
                             <label for="password" class="form-label">Mot de passe</label>
                             <input type="password" class="form-control" id="password" name="password"
                                    th:field="*{password}"
-                                   th:value="${user.password}" required>
+                                   th:value="${user.password}" required pattern="^[A-Za-z0-9\s-]+$" title="password invalide">
+                            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
                         </div>
                     </div>
                     <div class=" row d-flex justify-content-around mt-4">

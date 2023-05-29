@@ -22,7 +22,6 @@ public class EcommerceApplication  extends SpringBootServletInitializer {
     }
     @RequestMapping("/")
     String helloWorld() {
-        return "Hello World!";
+        return "front office";
     }
-
 }
