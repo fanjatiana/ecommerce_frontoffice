@@ -29,10 +29,10 @@ public class OrderItemController {
         int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         double total = orderItemService.calculateTotalPrice(orderItems);
         List<Category> categoryNames = categoryService.getAllCategory();
-        if(orderItems != null && categoryNames != null){
+        if(orderItems != null && categoryNames != null && itemQuantity> -1){
             model.addAttribute("categoryNames", categoryNames);
             model.addAttribute("totalPrice", total);
-            model.addAttribute("itemQuantity", itemQuantity);
+            model.addAttribute("productsQuantity", itemQuantity);
             model.addAttribute("orderItems", orderItems);
             return "cart";
         }else{

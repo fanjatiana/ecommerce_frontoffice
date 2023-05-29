@@ -31,13 +31,18 @@ public class ProductDetailsController {
     private CategoryService categoryService;
 
     @GetMapping("/products/{productId}")
-    public String getProductDetails(@PathVariable int productId, Model model) {
+    public String getProductDetails(@PathVariable int productId, Model model, Authentication authentication) {
         Optional<Product> productOptional = productService.getProductById(productId);
         Product product = productOptional.get();
         List<Category> categoryNames = categoryService.getAllCategory();
-        if (productOptional.isPresent() && categoryNames != null) {
+
+        List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+
+        if (productOptional.isPresent() && categoryNames != null && itemQuantity > -1) {
             model.addAttribute("categoryNames", categoryNames);
             model.addAttribute("product", product);
+            model.addAttribute("productsQuantity", itemQuantity);
             return "product-details";
         } else {
             return "redirect:/404";
