@@ -9,18 +9,59 @@
 </head>
 <header>
     <div class="container-fluid h-100">
-        <div class="col-12">
-            <nav class="navbar navbar-expand-lg d-flex justify-content-between ">
-                <div class="ms-2 col-4">
-                    <a href="#"><h1><img src="https://www.pngitem.com/pimgs/b/615-6158997_shoe-icon-png.png"
-                                         width="60" alt=""></h1></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        <div>
+            <nav class="navbar navbar-expand-lg d-flex flex-column justify-content-between flex-wrap">
+                <div class=" d-lg-flex justify-lg-between col-sm-12 col-md-12 col-lg-12">
+                    <div class=" d-sm-flex justify-sm-between col-sm-12 col-lg-2  col-md-12 ">
+                        <a href="#"><h1><img src="https://www.pngitem.com/pimgs/b/615-6158997_shoe-icon-png.png"
+                                             width="60" alt="logo"></h1></a>
+
+                        <button class="navbar-toggler " type="button" data-bs-toggle="collapse"
+                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse col-sm-12 col-mf-8 col-lg-8 justify-content-end"
+                         id="navbarSupportedContent">
+                        <ul class="navbar-nav mb-2 mb-lg-0 ">
+                            <th:block sec:authorize="!isAuthenticated()">
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/login}">Se connecter</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{/signup}">S'enregistrer</a>
+                                </li>
+                            </th:block>
+                            <th:block sec:authorize="isAuthenticated()">
+                                <li class="nav-item d-flex justify-content-between flex-row-reverse">
+                                    <a class="nav-link" th:href="@{/cart}"><img class=" cart-icon"
+                                                                                src="/images/cart3.svg"
+                                                                                alt="icone panier"></a>
+                                    <span class="selected-count" th:text="${productsQuantity}"></span>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <span class="username" th:text="${#authentication.name}"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item" th:href="@{/account}">Compte</a>
+                                        </li>
+                                        <li>
+                                            <form th:action="@{/logout}" method="post">
+                                                <input type="hidden" name="_csrf"/>
+                                                <button type="submit" class="dropdown-item">DÃ©connexion</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </th:block>
+                        </ul>
+                    </div>
                 </div>
-                <div class="ms-4 col-4">
+                <div class="col-sm-12 col-lg-6 mt-2">
                     <form class="d-flex" role="search" th:action="@{/products/search}" method="post">
                         <input class="form-control me-2" name="keyword" type="search"
                                placeholder="Rechercher un produit"
@@ -28,55 +69,19 @@
                         <button class="btn btn-dark" type="submit">Rechercher</button>
                     </form>
                 </div>
-                <div class="collapse navbar-collapse justify-content-end col-2" id="navbarSupportedContent">
-                    <ul class="navbar-nav mb-2 mb-lg-0 ">
-                        <th:block sec:authorize="!isAuthenticated()">
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/login}">Se connecter</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" th:href="@{/signup}">S'enregistrer</a>
-                            </li>
-                        </th:block>
-                        <th:block sec:authorize="isAuthenticated()">
-                            <li class="nav-item d-flex justify-content-between flex-row-reverse">
-                                <a class="nav-link" th:href="@{/cart}"><img class=" cart-icon" src="/images/cart3.svg"
-                                                                            alt=""></a>
-                                <span class="selected-count" th:text="${productsQuantity}"></span>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <span class="username" th:text="${#authentication.name}"></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" th:href="@{/account}">Compte</a>
-                                    </li>
-                                    <li>
-                                        <form th:action="@{/logout}" method="post">
-                                            <input type="hidden" name="_csrf"/>
-                                            <button type="submit" class="dropdown-item">Déconnexion</button>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        </th:block>
-                    </ul>
-                </div>
             </nav>
         </div>
         <div class="row">
-            <nav class="navbar navbar-expand-lg bg-secondary">
-                    <ul class="navbar-nav d-flex justify-content-around align-items-center ">
-                        <li class="nav-item">
-                            <a class="nav-link all-products" th:href="@{/products}">Tous les produits</a>
-                        </li>
-                        <li class="nav-item d-flex justify-content-between flex-wrap" th:each="c : ${categoryNames}">
-                            <a class="nav-link category" th:href="@{'/products/cat/'+${c.getNameCategory()}}"><span
-                                    th:text="${c.getNameCategory()}"></span></a>
-                        </li>
-                    </ul>
+            <nav class="navbar navbar-expand-lg bg-secondary d-md-flex justify-content-md-center d-sm-flex justify-content-sm-center">
+                <ul class=" ms-3 navbar-nav d-lg-flex  d-lg-flex flex-sm-wrap align-items-sm-center justify-content-lg-around align-items-center w-sm-100 ">
+                    <li class="nav-item">
+                        <a class="nav-link all-products" th:href="@{/products}">Tous les produits</a>
+                    </li>
+                    <li class="nav-item d-flex justify-content-between flex-wrap" th:each="c : ${categoryNames}">
+                        <a class="nav-link category" th:href="@{'/products/cat/'+${c.getNameCategory()}}"><span
+                                th:text="${c.getNameCategory()}"></span></a>
+                    </li>
+                </ul>
             </nav>
         </div>
     </div>
