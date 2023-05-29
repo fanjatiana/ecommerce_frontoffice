@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
               <label for="password" class="form-label">Password:</label>
-              <input type="password" class="form-control" id="password" name="password" th:field="*{password}" minlength="8"   >
+              <input type="password" class="form-control" id="password" name="password" th:field="*{password}" minlength="8"  pattern="^[A-Za-z0-9\s-]+$" title="password invalide" >
               <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error-message"></span>
             </div>
             <div class="mb-3">

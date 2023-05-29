@@ -22,7 +22,7 @@
                             <div>
                                 <div class="mb-3">
                                     <label for="clientName" class="form-label">Nom</label>
-                                    <input type="text" id="clientName" th:field="*{order.clientName}" class="form-control" required pattern="^[A-Za-z\s-]+$">
+                                    <input type="text" id="clientName" th:field="*{order.clientName}" class="form-control" required pattern="^[A-Za-z\s-]+$" title="Nom de client invalide">
                                     <p th:if="${#fields.hasErrors('order.clientName')}" class="text-danger">Nom de client invalide</p>
                                 </div>
                                 <div class="mb-3">
@@ -33,37 +33,37 @@
                                 <div class="mb-3">
                                     <label for="clientPhone" class="form-label">Téléphone</label>
                                     <input type="tel" id="clientPhone" th:field="*{order.clientPhone}"
-                                           class="form-control" required pattern="[0-9]{10}" minlength="10" maxlength="10">
+                                           class="form-control" required pattern="[0-9]{10}" minlength="10" maxlength="10" title="Numéro de téléphone invalide">
                                     <p th:if="${#fields.hasErrors('order.clientPhone')}" class="text-danger">Numéro de téléphone invalide</p>
                                 </div>
                                 <div class="mb-3">
                                     <label for="shippingAddressLine1" class="form-label">Adresse de Facturation</label>
                                     <input type="text" id="shippingAddressLine1" th:field="*{order.shippingAddressLine1}"
-                                           class="form-control" required pattern="^[A-Za-z0-9\s-]+$">
+                                           class="form-control" required pattern="^[A-Za-z0-9\s-]+$" title="Adresse invalide">
                                     <p th:if="${#fields.hasErrors('order.shippingAddressLine1')}" class="text-danger">Adresse invalide</p>
                                 </div>
                                 <div class="mb-3">
                                     <label for="shippingAddressLine2" class="form-label">Autre adresse (facultatif):</label>
                                     <input type="text" id="shippingAddressLine2" th:field="*{order.shippingAddressLine2}"
-                                           class="form-control" pattern="^[A-Za-z0-9\s-]*$">
+                                           class="form-control" pattern="^[A-Za-z0-9\s-]*$" title="Adresse invalide">
                                     <p th:if="${#fields.hasErrors('order.shippingAddressLine2')}" class="text-danger">Adresse invalide</p>
                                 </div>
                                 <div class="mb-3">
                                     <label for="shippingCity" class="form-label">Ville:</label>
                                     <input type="text" id="shippingCity" th:field="*{order.shippingCity}"
-                                           class="form-control" required pattern="^[A-Za-z\s-]+$">
+                                           class="form-control" required pattern="^[A-Za-z\s-]+$" title="Ville incorrecte">
                                     <p th:if="${#fields.hasErrors('order.shippingCity')}" class="text-danger">Ville incorrecte</p>
                                 </div>
                                 <div class="mb-3">
                                     <label for="shippingPostalCode" class="form-label">Code postal</label>
                                     <input type="text" id="shippingPostalCode" th:field="*{order.shippingPostalCode}"
-                                           class="form-control" required pattern="^[0-9]{5}$">
+                                           class="form-control" required pattern="^[0-9]{5}$" title="Invalid postal code">
                                     <p th:if="${#fields.hasErrors('order.shippingPostalCode')}" class="text-danger">Invalid postal code</p>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="shippingState" class="form-label">Pays:</label>
                                     <input type="text" id="shippingState" th:field="*{order.shippingState}"
-                                           class="form-control" required pattern="^[A-Za-z\s-]+$">
+                                           class="form-control" required pattern="^[A-Za-z\s-]+$" title="Pays non valide">
                                     <p th:if="${#fields.hasErrors('order.shippingState')}" class="text-danger">Pays non valide</p>
                                 </div>
 
@@ -81,26 +81,26 @@
                                         <label for="cardNumber" class="form-label">Numéro de carte</label>
                                         <input th:field="*{payment.cardNumber}" type="text" class="form-control"
                                                id="cardNumber" name="cardNumber" minlength="16" maxlength="16"
-                                               pattern="[0-9]{16}" placeholder="1225698746123548" required>
+                                               pattern="[0-9]{16}" placeholder="1225698746123548" required title="Numéro de carte invalide">
                                         <p th:if="${#fields.hasErrors('payment.cardNumber')}" class="text-danger">Numéro de carte invalide</p>
                                     </div>
                                     <div class="mb-3">
                                         <label for="cardHolderName" class="form-label">Nom sur la carte</label>
                                         <input type="text" th:field="*{payment.cardHolderName}" class="form-control"
-                                               id="cardHolderName" name="cardHolderName" required pattern="^[A-Za-z\s-]+$">
+                                               id="cardHolderName" name="cardHolderName" required pattern="^[A-Za-z\s-]+$" title="Nom invalide">
                                         <p th:if="${#fields.hasErrors('payment.cardHolderName')}" class="text-danger">Invalid nom</p>
                                     </div>
                                     <div class="mb-3">
                                         <label for="expirationDate">Date d'expiration</label>
                                         <input type="month" th:field="*{payment.cardExpiry}" id="expirationDate"
-                                               name="expirationDate" required>
+                                               name="expirationDate" required title="Invalid date d'expiration">
                                         <p th:if="${#fields.hasErrors('payment.cardExpiry')}" class="text-danger">Invalid date d'expiration</p>
                                     </div>
                                     <div class="mb-3">
                                         <label for="securityCode" class="form-label">Code de sécurité(CVV)</label>
                                         <input type="text" th:field="*{payment.cardCVV}" class="form-control"
                                                id="securityCode" name="securityCode" minlength="3" maxlength="3"
-                                               pattern="[0-9]{3}" required placeholder="456">
+                                               pattern="[0-9]{3}" required placeholder="456" title="Invalid CVV code">
                                         <p th:if="${#fields.hasErrors('payment.cardCVV')}" class="text-danger">Invalid CVV code</p>
                                     </div>
                                 </div>
