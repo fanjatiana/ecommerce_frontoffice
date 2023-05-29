@@ -20,7 +20,7 @@
             <p>Aucun produit trouvé.</p>
         </div>
         <div class="flex justify-content-around flex-wrap row mt-4 " th:if="${not #lists.isEmpty(products)}">
-            <div class="card  p-2 mb-5 me-2 ms-2  col-md-6 col-lg-4 col-xl-3 shadow"
+            <div class="card p-2 mb-5 me-2 ms-2  col-md-6 col-lg-4 col-xl-3 shadow-sm"
                  th:each="product : ${products} ">
                 <div class="col-12 mb-1  d-flex flex-column">
                     <!-- <img th:src="${product.photoProduct}" alt="Product Photo" width="100" height="100">-->

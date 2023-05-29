@@ -1,15 +1,19 @@
-html{
+body, html{
     height: 100%;
 }
 
-body {
-    min-height: 110vh;
-    margin: 0;
-    padding: 0;
-    position: relative
+.login-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.55);
 }
 
-main {
-    min-height: 100%;
-    margin-bottom: 3em;
+.login-card {
+    box-shadow: 2px 1px 35px 6px rgba(0, 0, 0, 0.6);
+
+}
+.full-height {
+    height: 100vh;
 }
