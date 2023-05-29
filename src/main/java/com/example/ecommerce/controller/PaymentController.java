@@ -42,19 +42,19 @@ public class PaymentController {
 
         List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
         double totalAmount = orderService.calculateTotalAmount(orderItems);
-        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+        int productsQuantity = orderItemService.calculateTotalQuantity(orderItems);
+        int nbProductSelected = orderItemService.calculateTotalQuantity(orderItems);
         List<Category> categoryNames = categoryService.getAllCategory();
 
-        if (orderItems != null && categoryNames != null) {
-            // La quantité et le montant total sont supérieurs ou égaux à 1, afficher la page de paiement
+        if (orderItems != null && categoryNames != null && productsQuantity >= 1 && nbProductSelected >-1 ) {
             model.addAttribute("categoryNames", categoryNames);
             model.addAttribute("totalPrice", totalAmount);
-            model.addAttribute("itemQuantity", itemQuantity);
+            model.addAttribute("itemQuantity", productsQuantity);
+            model.addAttribute("productsQuantity", nbProductSelected);
             model.addAttribute("paymentForm", paymentForm);
 
             return "payment";
         } else {
-            // La quantité ou le montant total est inférieur à 1, rediriger vers une page appropriée
             return "redirect:/404";
         }
 

@@ -10,13 +10,16 @@
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/products.css">
 </head>
-<div th:replace="~{components/header :: header}"></div>
+<div th:replace="~{components/header :: header}"  th:with="productsQuantity=${productsQuantity}"></div>
 <main>
     <div class="container container-fluid mt-5">
         <div class="row mt-4 mb-3">
             <h2 class="ms-5">Liste des produits</h2>
         </div>
-        <div class="flex justify-content-around flex-wrap row mt-4 ">
+        <div th:if="${#lists.isEmpty(products)}" class="text-center">
+            <p>Aucun produit trouvé.</p>
+        </div>
+        <div class="flex justify-content-around flex-wrap row mt-4 " th:if="${not #lists.isEmpty(products)}">
             <div class="card  p-2 mb-5 me-2 ms-2  col-md-6 col-lg-4 col-xl-3 shadow"
                  th:each="product : ${products} ">
                 <div class="col-12 mb-1  d-flex flex-column">

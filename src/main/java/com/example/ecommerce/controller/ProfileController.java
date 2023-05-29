@@ -1,9 +1,11 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.Category;
+import com.example.ecommerce.entity.OrderItem;
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
 import com.example.ecommerce.service.CategoryService;
+import com.example.ecommerce.service.OrderItemService;
 import com.example.ecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,19 @@ public class ProfileController {
     UserService userService;
     @Autowired
     CategoryService categoryService;
+    @Autowired
+    private OrderItemService orderItemService;
 
     @GetMapping("/profile")
     public String showProfile(Model model, Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated()) {
+
+        List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+        if (authentication != null && authentication.isAuthenticated() && itemQuantity > -1) {
             User user = (User) authentication.getPrincipal();
             List<Category> categoryNames = categoryService.getAllCategory();
             model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("productsQuantity", itemQuantity);
             model.addAttribute("user", user);
             return "profile";
         } else {

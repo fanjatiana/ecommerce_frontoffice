@@ -8,7 +8,7 @@
     <title>Payement validé</title>
 </head>
 <body>
-<div th:replace="~{components/header :: header}"></div>
+<div th:replace="~{components/header :: header}"  th:with="productsQuantity=${productsQuantity}"></div>
 <main>
     <div class="container-fluid mt-5 mb-5 d-flex justify-content-center flex-column align-items-center">
         <div class="card mb-3" style="max-width: 650px;">

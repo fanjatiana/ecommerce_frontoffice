@@ -1,10 +1,14 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.Category;
+import com.example.ecommerce.entity.OrderItem;
 import com.example.ecommerce.entity.Product;
+import com.example.ecommerce.repository.OrderItemRepository;
 import com.example.ecommerce.service.CategoryService;
+import com.example.ecommerce.service.OrderItemService;
 import com.example.ecommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,30 +25,44 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private OrderItemService orderItemService;
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @GetMapping("/products")
-    public String getAllProducts(Model model) {
+    public String getAllProducts(Model model, Authentication authentication) {
         List<Product> products = productService.getAllProducts();
-        if(products != null){
+
+        List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+
+        if (products != null && itemQuantity > -1) {
             model.addAttribute("products", products);
             List<Category> categoryNames = categoryService.getAllCategory();
             model.addAttribute("categoryNames", categoryNames);
+            model.addAttribute("productsQuantity", itemQuantity);
             return "products";
-        }else{
+        } else {
             return "redirect:/404";
         }
 
     }
 
     @GetMapping("/products/cat/{categoryName}")
-    public String getProductsByCategory(@PathVariable("categoryName") String categoryName, Model model) {
+    public String getProductsByCategory(@PathVariable("categoryName") String categoryName, Model model, Authentication authentication) {
         List<Product> products = productService.getProductsByCategory(categoryName);
         List<Category> categoryNames = categoryService.getAllCategory();
-        if(products != null && categoryNames != null){
+
+        List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
+
+        if (products != null && categoryNames != null && itemQuantity > -1) {
             model.addAttribute("categoryNames", categoryNames);
             model.addAttribute("products", products);
+            model.addAttribute("productsQuantity", itemQuantity);
             return "products";
-        }else{
+        } else {
             return "redirect:/404";
         }
 
@@ -71,9 +89,19 @@ public class ProductController {
 
 
     @PostMapping("/products/search")
-    public String searchProducts(@RequestParam("keyword") String keyword, Model model) {
+    public String searchProducts(@RequestParam("keyword") String keyword, Model model, Authentication authentication) {
+        List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         List<Product> products = productService.searchProducts(keyword);
-        model.addAttribute("products", products);
-        return "products";
+
+        if (products != null && itemQuantity > -1) {
+            model.addAttribute("productsQuantity", itemQuantity);
+            model.addAttribute("products", products);
+            return "products";
+        } else {
+            return "redirect:/404";
+        }
+
+
     }
 }

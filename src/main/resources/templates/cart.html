@@ -10,7 +10,7 @@
     <title>Panier</title>
 </head>
 <body>
-<div th:replace="~{components/header :: header}"></div>
+<div th:replace="~{components/header :: header}"  th:with="productsQuantity=${productsQuantity}"></div>
 <main>
     <div class="container">
         <div class="mt-4 mb-4">
@@ -59,7 +59,7 @@
                 <div class="card shadow p-3 mb-5 bg-body rounded">
                     <div class="card-body">
                         <div>
-                            <p th:text="'Nombre d article :'+${itemQuantity}"></p>
+                            <p th:text="'Nombre d article :' + ${productsQuantity}"></p>
                             <p th:text="'Prix total :'+ ${totalPrice}"></p>
                         </div>
                         <div>

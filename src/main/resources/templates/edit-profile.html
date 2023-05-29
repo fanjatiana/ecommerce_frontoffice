@@ -10,7 +10,7 @@
     <title>Editer votre profil</title>
 </head>
 <body>
-<div th:replace="~{components/header :: header}"></div>
+<div th:replace="~{components/header :: header}"  th:with="productsQuantity=${productsQuantity}"></div>
 <main>
     <div class="container d-flex justify-content-center align-items-center flex-column mt-4 mb-4">
         <div class="row mt-4 mb-3">

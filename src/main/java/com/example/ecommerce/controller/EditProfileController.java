@@ -1,10 +1,12 @@
 package com.example.ecommerce.controller;
 
 import com.example.ecommerce.entity.Category;
+import com.example.ecommerce.entity.OrderItem;
 import com.example.ecommerce.entity.Role;
 import com.example.ecommerce.entity.User;
 import com.example.ecommerce.repository.UserRepository;
 import com.example.ecommerce.service.CategoryService;
+import com.example.ecommerce.service.OrderItemService;
 import com.example.ecommerce.service.RoleService;
 import com.example.ecommerce.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -28,6 +30,9 @@ public class EditProfileController {
     private RoleService roleService;
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private OrderItemService orderItemService;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -35,8 +40,11 @@ public class EditProfileController {
     public String showEditProfileForm(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<Category> categoryNames = categoryService.getAllCategory();
+        List<OrderItem> orderItems = orderItemService.getCartItemsFromAuthentication(authentication);
+        int itemQuantity = orderItemService.calculateTotalQuantity(orderItems);
         model.addAttribute("categoryNames", categoryNames);
-        if (authentication.isAuthenticated()) {
+        if (authentication.isAuthenticated() && itemQuantity > -1) {
+            model.addAttribute("productsQuantity", itemQuantity);
             User user = (User) authentication.getPrincipal();
             model.addAttribute("user", user);
             return "edit-profile";
